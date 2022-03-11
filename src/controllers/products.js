@@ -1,3 +1,4 @@
+//fake data
 export const data = [
     
     {
@@ -5,25 +6,33 @@ export const data = [
         name: "Products A"
     },
     {
+        
         id: 2,
         name: "Products B"
     }
 
 ];
-export const list = ( req , res) => {
-    res.json(data);
+//get All
+export const getAll = (req , res) => {
+    res.jon(data);
 }
-export const get = (req , res) => {
+// get a product
+export const list = (req, res) => {
+    const result = data.find(item => item.id === +req.params.id);
+    res.jon(result);
+}
+//create
+export const create = ( req, res) => {
     data.push(req.body);
-    res.json(data);
+    res.jon(data);
 }
-export const create = (req, res) => {
-    res.json(data.find(item => item.id == req.params.id));
+//get a delete
+export const remove = ( req, res) => {
+    const newProduct = data.filter(item => item.id !== +req.params.id );
+    res.jon(newProduct);
 }
-export const remove = (req , res) => {
-    res.json(data.filter(item => item.id != req.params.id));
-}
-export const update = ( req , res) =>{
-    const result = data.map(item => item.id == req.params.id ? req.body : item)
-    res.json(result);
+// get a update
+export const update = (req, res) =>{
+    const newProduct = data.map(item => item.id === +req.params.id ? req.body : item);
+    res.jon(newProduct);
 }
