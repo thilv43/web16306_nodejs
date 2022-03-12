@@ -1,4 +1,4 @@
-exports.checkAuth = (req , res , next) => {
+export const checkAuth = (req , res , next) => {
     const admin = true;
     if(admin){
         next();

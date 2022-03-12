@@ -1,7 +1,8 @@
-import express from("express");
-import productRouter from "./router/product";
-import cors from require("cors");
+import express from "express";
+import productRouter from "./routes/product";
+var cors = require('cors');
 import morgan from "morgan";
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -12,6 +13,9 @@ app.use(cors());
 app.use(morgan("tiny"));
 // routing
 app.use("/api", productRouter);
+
+mongoose.connect("mongodb://localhost:27017/web_16306_node_js")
+.then(() => console.log("kết nối thành công !!!"))
 
 // connect
 const PORT = 3001;
