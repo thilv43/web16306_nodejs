@@ -1,5 +1,7 @@
 import mongoose  from "mongoose";
+import slugify from "slugify";
 const Product = mongoose.model('Product', { name: String });
+
 
 // const products = [
 //     { id: 1, name: "Product A" },
@@ -31,6 +33,7 @@ export const get = async (req, res) => { // get a product
 }
 
 export const create = async (req, res) => { // create product
+    req.body.slug = slugify(req.body.name);
     try {
         const product = await new Product(req.body).save();
         res.json(product);    

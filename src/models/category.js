@@ -1,0 +1,17 @@
+import mongoose from "mongoose";
+
+const categorySchema = new Schema({
+    name: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    slug: {
+        type: String,
+        lowercase: true,
+        unique: true,
+        index: true
+    }
+}, {timestams: true});
+
+export default mongoose.model("Category", categorySchema);

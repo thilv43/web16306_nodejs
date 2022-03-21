@@ -1,6 +1,7 @@
 import express from "express";
 import productRouter from "./routes/product";
-var cors = require('cors');
+import categoryRouter from "./routes/category";
+import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(morgan("tiny"));
 // routing
 app.use("/api", productRouter);
+app.use("/api", categoryRouter);
 
 mongoose.connect("mongodb://localhost:27017/web_16306_node_js")
 .then(() => console.log("kết nối thành công !!!"))
