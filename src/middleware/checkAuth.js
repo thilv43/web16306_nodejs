@@ -1,4 +1,4 @@
-import express from "express";
+import expressJWT from 'express-jwt'
 
 export const checkAuth = (req , res , next) => {
     const admin = true;
