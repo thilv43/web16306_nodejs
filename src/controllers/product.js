@@ -10,8 +10,12 @@ const Product = mongoose.model('Product', { name: String });
 // ];
 
 export const list = async (req, res) => { // get all
+    const limitNumber = 20;
+    const limit = req.query.limit ? +req.query.limit : limitNumber;
+    const sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+    const order = req.query.order ? req.query.order : 'desc';
     try {
-        const product =  await Product.find({});
+        const product =  await Product.find().limit(limit).exex();
         res.json(product);
     } catch (error) {
         res.status(400).json({

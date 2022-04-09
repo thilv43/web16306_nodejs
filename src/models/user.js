@@ -19,18 +19,25 @@ const userSchema =mongoose.Schema({
     },
     salt: {
         type: String,
+    },
+    role: {
+        type: Number,
+        default: 0
     }
     
 },{timestamps: true});
 
 userSchema.methods = {
     authenticate(password){
+        console.log('password in method', password);
+        console.log('this.password == this.encryPassword(password)', this.password == this.encryptPassword(password));
         return this.encryptPassword(password) == this.password;
     },
     encryptPassword(password){
-        console.log('password', password)
+        console.log('password in method', password);
         if(!password) return;
         try {
+            console.log('password da ma hoa', createHmac('sha256',this.salt).update(password).digest('hex'));
             return createHmac("sha256", this.salt).update(password).digest("hex");
         } catch (error) {
             console.log(error);
@@ -40,6 +47,7 @@ userSchema.methods = {
 
 userSchema.pre("save", function save(next){
     try {
+        console.log('this.password', this.password);
         this.salt = uudiv4();
         this.password = this.encryptPassword(this.password);
         return next();

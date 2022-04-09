@@ -8,8 +8,8 @@ export const signup = async (req, res) => {
         const {name, email, password} = req.body;
         const extitUser = await User.findOne({email}).exec();
         if(extitUser) {
-            res.json({
-                message: "Tài khoản đã tồn tại, vui lòng đăng ký lại"
+            return res.status(400).json({
+                message: "User đã tồn tại"
             })
         }
         const user = await new User({name, email, password}).save();
@@ -32,17 +32,17 @@ export const signin = async ( req, res) => {
         const {email, password} = req.body;
         const user = await User.findOne({email}).exec();
         if(!user){
-            res.status(401).json({
+            return res.status(401).json({
                 message: "User không tồn tại"
             })
         }
         if(!user.authenticate(password)){
-            res.status(401).json({
+            return res.status(401).json({
                 message: "Mat khau khong ton tai"
             })
         }
         const token = jwt.sign({email}, "123456", {expiresIn: 60 * 60});
-        res.json({
+        return res.json({
             token,
             user: {
                 _id: user._id,
