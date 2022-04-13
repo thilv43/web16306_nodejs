@@ -12,7 +12,6 @@ export const userById = async (req, res, next , id) => {
         req.profile = user;
         req.profile.password = undefined;
         req.profile.salt = undefined;
-
         next();
     } catch (error) {
         console.log(error);

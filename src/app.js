@@ -20,9 +20,10 @@ app.use("/api", authRouter);
 
 mongoose.connect("mongodb://localhost:27017/web_16306_node_js")
 .then(() => console.log("kết nối thành công !!!"))
+.then((error) => console.log(error))
 
 // connect
-const PORT = 3001;
+const PORT = 3005;
 app.listen(PORT, () => {
     console.log("Server đang chạy cổng " ,PORT);
 })
