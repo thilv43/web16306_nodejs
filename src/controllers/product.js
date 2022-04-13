@@ -26,7 +26,7 @@ export const list = async (req, res) => { // get all
             message: "không thành công"
         })
     }
-  }
+}
 
 export const get = async (req, res) => { // get a product
     try {
